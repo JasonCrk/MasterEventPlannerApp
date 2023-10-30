@@ -1,10 +1,17 @@
 import { Outlet } from 'react-router-dom'
 
+import Navbar from '../components/Navbar.component'
+
 const MainLayout = () => {
   return (
-    <div>
-      <Outlet />
-    </div>
+    <>
+      <Navbar />
+      <div className='d-flex justify-content-center'>
+        <div style={{ width: '60%' }}>
+          <Outlet />
+        </div>
+      </div>
+    </>
   )
 }
 

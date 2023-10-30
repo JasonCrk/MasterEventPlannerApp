@@ -1,4 +1,5 @@
 export default {
+  BASE_API_URL: import.meta.env.VITE_REACT_BASE_API_URL,
   FIREBASE_API_KEY: import.meta.env.VITE_REACT_FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN: import.meta.env.VITE_REACT_FIREBASE_AUTH_DOMAIN,
   FIREBASE_PROJECT_ID: import.meta.env.VITE_REACT_FIREBASE_PROJECT_ID,
@@ -8,4 +9,6 @@ export default {
   FIREBASE_APP_ID: import.meta.env.VITE_REACT_FIREBASE_APP_ID,
   FIREBASE_KEY_PAIR_MESSAGING: import.meta.env
     .VITE_REACT_FIREBASE_KEY_PAIR_MESSAGING,
+  DEFAULT_AVATAR_URL:
+    'https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg',
 }
