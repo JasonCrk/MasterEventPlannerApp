@@ -46,6 +46,8 @@ export const isAuthenticatedLoader: LoaderFunction = async () => {
 
     try {
       newTokens = await refreshAccessToken(refreshToken)
+      localStorage.setItem('accessToken', newTokens.accessToken)
+      localStorage.setItem('refreshToken', newTokens.refreshToken)
     } catch (e) {
       return rejectAuthentication()
     }
