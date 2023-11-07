@@ -1,3 +1,12 @@
+export interface BootstrapAlert {
+  id: string
+  type: BootstrapColorOptions
+  message: string
+  timestamp?: number
+}
+
+export type NewAlert = Omit<BootstrapAlert, 'id'>
+
 export enum BootstrapColor {
   primary,
   secondary,
