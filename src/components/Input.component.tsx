@@ -9,6 +9,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   adornment?: () => ReactNode
   register: UseFormRegister<any>
   name: string
+  label?: string
 }
 
 const Input: FC<Props> = ({
@@ -18,21 +19,38 @@ const Input: FC<Props> = ({
   isError,
   errorMessage,
   name,
+  label,
   ...props
 }) => {
   return (
-    <div className='input-group'>
-      {adornment && <span className='input-group-text'>{adornment()}</span>}
-
-      <input
-        className={`form-control ${fullWidth && 'w-100'} ${
-          isError && 'is-invalid'
-        }`}
-        {...props}
-        {...register(name, { valueAsNumber: props.type === 'number' })}
-      />
-
-      {isError && <p className='text-danger mb-1'>{errorMessage}</p>}
+    <div>
+      {label && (
+        <label
+          htmlFor={props.id}
+          className='form-label'
+          style={{ marginBottom: 2 }}
+        >
+          {label}
+        </label>
+      )}
+      <div className='input-group'>
+        {adornment && <span className='input-group-text'>{adornment()}</span>}
+        <input
+          className={`form-control ${fullWidth && 'w-100'} mb-1 ${
+            isError && 'is-invalid'
+          }`}
+          {...props}
+          {...register(name, {
+            setValueAs: value => {
+              if (props.type === 'number') return parseInt(value)
+              if (props.type === 'datetime-local' && value)
+                return new Date(value).toISOString()
+              return value
+            },
+          })}
+        />
+      </div>
+      {isError && <p className='text-danger mb-0'>{errorMessage}</p>}
     </div>
   )
 }

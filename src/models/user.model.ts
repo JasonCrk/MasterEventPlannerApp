@@ -7,12 +7,12 @@ export interface User {
   password: string
 }
 
-export type UserId = Pick<User, 'id'>
-export type UserUsername = Pick<User, 'username'>
-export type UserEmail = Pick<User, 'email'>
-export type UserPassword = Pick<User, 'password'>
+export type UserId = User['id']
+export type UserUsername = User['username']
+export type UserEmail = User['email']
+export type UserPassword = User['password']
 
-export interface UserAuth {
+export interface SimpleUser {
   id: UserId
   username: UserUsername
   account: {
