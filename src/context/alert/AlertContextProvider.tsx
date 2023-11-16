@@ -11,15 +11,15 @@ interface Props {
 export const AlertContextProvider: FC<Props> = ({ children }) => {
   const [alerts, setAlerts] = useState<AlertContextState['alerts']>([])
 
-  const showAlert: AlertContextState['showAlert'] = newToast => {
-    setAlerts(prevToasts => [
-      ...prevToasts,
-      { id: crypto.randomUUID(), ...newToast },
+  const showAlert: AlertContextState['showAlert'] = newAlert => {
+    setAlerts(prevAlerts => [
+      ...prevAlerts,
+      { id: crypto.randomUUID(), ...newAlert },
     ])
   }
 
-  const closeAlert: AlertContextState['closeAlert'] = toastId => {
-    setAlerts(prevToasts => prevToasts.filter(toast => toast.id !== toastId))
+  const closeAlert: AlertContextState['closeAlert'] = alertId => {
+    setAlerts(prevAlerts => prevAlerts.filter(alert => alert.id !== alertId))
   }
 
   return (

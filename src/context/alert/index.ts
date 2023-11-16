@@ -4,8 +4,8 @@ import { NewAlert, BootstrapAlert } from '../../models/bootstrap.model'
 
 export interface AlertContextState {
   alerts: BootstrapAlert[]
-  showAlert: (toast: NewAlert) => void
-  closeAlert: (toastId: string) => void
+  showAlert: (alert: NewAlert) => void
+  closeAlert: (alertId: string) => void
 }
 
 export const alertContext = createContext<AlertContextState>({

@@ -12,6 +12,7 @@ const Navbar: FC = () => {
         <Link className='navbar-brand fw-bold' to='/'>
           Master Planner Event
         </Link>
+
         {/* <div className='collapse navbar-collapse'>
           <form>
             <Input
@@ -22,6 +23,7 @@ const Navbar: FC = () => {
             />
           </form>
         </div> */}
+
         <div className='d-flex align-items-center gap-3'>
           <ul className='nav nav-underline d-flex'>
             <NavLink href='/'>Home</NavLink>
