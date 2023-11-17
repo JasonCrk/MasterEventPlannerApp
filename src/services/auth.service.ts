@@ -1,64 +1,65 @@
 import { LoginCredentials, RegisterCredentials } from '../models/auth.model'
-
-import { UserAuth } from '../models/user.model'
-
+import { SimpleUser } from '../models/user.model'
 import { AuthTokensResponse, MessageResponse } from '../models/response.model'
 
 import { authBaseEndpoint } from './endpoints'
 
 export const getUserWithToken = async (
   accessToken: string
-): Promise<UserAuth> => {
-  const res = await authBaseEndpoint.get<UserAuth>('/user', {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-  return res.data
+): Promise<SimpleUser> => {
+  return authBaseEndpoint
+    .get<SimpleUser>('/user', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(response => response.data)
 }
 
 export const verifyToken = async (
   accessToken: string | null
 ): Promise<MessageResponse> => {
-  const res = await authBaseEndpoint.get<MessageResponse>('/verify', {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-  return res.data
+  return authBaseEndpoint
+    .get<MessageResponse>('/verify', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(response => response.data)
 }
 
 export const refreshAccessToken = async (
   refreshToken: string | null
 ): Promise<AuthTokensResponse> => {
-  const res = await authBaseEndpoint.post<AuthTokensResponse>(
-    '/refresh-token',
-    null,
-    {
+  return authBaseEndpoint
+    .post<AuthTokensResponse>('/refresh-token', null, {
       headers: {
         Authorization: `Bearer ${refreshToken}`,
       },
-    }
-  )
-  return res.data
+    })
+    .then(response => response.data)
 }
 
 export const login = async (
   credentials: LoginCredentials
 ): Promise<AuthTokensResponse> => {
-  const res = await authBaseEndpoint.post<AuthTokensResponse>(
-    '/login',
-    credentials
-  )
-  return res.data
+  return authBaseEndpoint
+    .post<AuthTokensResponse>('/login', credentials)
+    .then(response => response.data)
 }
 
 export const registerUser = async (
   credentials: RegisterCredentials
 ): Promise<AuthTokensResponse> => {
-  const res = await authBaseEndpoint.post<AuthTokensResponse>(
-    '/register',
-    credentials
-  )
-  return res.data
+  return authBaseEndpoint
+    .post<AuthTokensResponse>('/register', credentials)
+    .then(response => response.data)
+}
+
+export const logout = async (accessToken: string): Promise<void> => {
+  authBaseEndpoint.post('/logout', null, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
 }

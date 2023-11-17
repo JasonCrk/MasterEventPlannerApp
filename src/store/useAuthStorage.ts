@@ -1,19 +1,19 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
-import { UserAuth } from '../models/user.model'
+import { SimpleUser } from '../models/user.model'
 
 interface State {
   isAuth: boolean
   accessToken: string | null
   refreshToken: string | null
-  user: UserAuth | null
+  user: SimpleUser | null
 }
 
 interface Actions {
   setAuthTokens: (tokens: Pick<State, 'accessToken' | 'refreshToken'>) => void
   setIsAuth: (auth: boolean) => void
-  setUser: (user: UserAuth | null) => void
+  setUser: (user: SimpleUser | null) => void
 }
 
 export const useAuthStore = create(
@@ -27,7 +27,6 @@ export const useAuthStore = create(
       set(state => ({
         ...state,
         accessToken: tokens.accessToken,
-        isAuth: true,
         refreshToken: tokens.refreshToken,
       })),
     setUser: user => set(state => ({ ...state, user })),

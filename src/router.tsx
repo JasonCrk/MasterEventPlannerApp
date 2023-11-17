@@ -3,9 +3,12 @@ import { createBrowserRouter } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import AuthLayout from './layouts/AuthLayout'
 
-import Home from './pages/Home.page'
 import Login from './pages/Login.page'
 import Register from './pages/Register.page'
+
+import Home from './pages/Home.page'
+import CreateEvent from './pages/CreateEvent.page'
+import EventDetails from './pages/EventDetails.page'
 
 import { isAuthenticatedLoader, isNotAuthenticatedLoader } from './loaders'
 
@@ -33,6 +36,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: '/create',
+        element: <CreateEvent />,
+      },
+      {
+        path: '/events/:eventId',
+        element: <EventDetails />,
       },
     ],
   },
