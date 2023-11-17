@@ -1,13 +1,32 @@
 import { FC } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { useShallow } from 'zustand/shallow'
 
 import { useAuthStore } from '../store/useAuthStorage'
+
+import { logout } from '../services/auth.service'
 
 import Avatar from './Avatar.component'
 
 const UserOptions: FC = () => {
-  const user = useAuthStore(state => state.user)
+  const { setAuthTokens, setIsAuth, setUser } = useAuthStore()
+  const { user, accessToken } = useAuthStore(
+    useShallow(state => ({ user: state.user, accessToken: state.accessToken }))
+  )
+
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    if (accessToken) {
+      await logout(accessToken)
+      setAuthTokens({ accessToken: null, refreshToken: null })
+      setIsAuth(false)
+      navigate('/auth/login')
+      setUser(null)
+    }
+  }
 
   return (
     <div className='dropdown dropstart'>
@@ -24,7 +43,12 @@ const UserOptions: FC = () => {
           <hr className='dropdown-divider' />
         </li>
         <li>
-          <button className='dropdown-item bg-danger text-white'>Logout</button>
+          <button
+            className='dropdown-item bg-danger text-white'
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </li>
       </ul>
     </div>

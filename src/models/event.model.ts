@@ -1,11 +1,22 @@
 import { Category } from './category.model'
-import { SimpleUser, User } from './user.model'
+import { SimpleUser } from './user.model'
 
 export enum Status {
   PENDING = 'PENDING',
   IN_PROGRESS = 'IN_PROGRESS',
   FINALIZED = 'FINALIZED',
   CANCELLED = 'CANCELLED',
+}
+
+interface StatusValuesData {
+  [key: string]: string
+}
+
+export const StatusValues: StatusValuesData = {
+  PENDING: 'Pending',
+  IN_PROGRESS: 'In progress',
+  FINALIZED: 'Finalized',
+  CANCELLED: 'Cancelled',
 }
 
 export enum Visibility {
@@ -15,7 +26,7 @@ export enum Visibility {
 
 export interface Event {
   id: string
-  coordinator: User
+  coordinator: SimpleUser
   name: string
   description: string
   category: Category
@@ -51,4 +62,9 @@ export interface CreateEventData {
 export interface EventItem {
   id: EventId
   coordinator: SimpleUser
+}
+
+export interface EventDetails extends Event {
+  participating: boolean
+  numberParticipants: number
 }

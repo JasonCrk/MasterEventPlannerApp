@@ -55,3 +55,11 @@ export const registerUser = async (
     .post<AuthTokensResponse>('/register', credentials)
     .then(response => response.data)
 }
+
+export const logout = async (accessToken: string): Promise<void> => {
+  authBaseEndpoint.post('/logout', null, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+}
