@@ -10,7 +10,7 @@ interface Props {
 const ConnectionItem: FC<Props> = props => {
   return (
     <div
-      className={'text-center border rounded p-3 bg-dark text-white '}
+      className={'text-center border rounded p-3 bg-white text-dark '}
       style={{
         maxHeight: '300px',
         maxWidth: '220px',
