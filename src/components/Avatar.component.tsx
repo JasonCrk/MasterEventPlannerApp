@@ -1,22 +1,21 @@
-import { FC } from 'react'
+import { FC, ImgHTMLAttributes } from 'react'
 
 import { AccountPicture } from '../models/account.model'
 
 import config from '../config'
 
-interface Props {
+interface Props extends ImgHTMLAttributes<HTMLImageElement> {
   size: string
   src: AccountPicture | undefined
-  alt: string
 }
 
-const Avatar: FC<Props> = ({ size, src, alt }) => {
+const Avatar: FC<Props> = ({ size, src, style, className, ...props }) => {
   return (
     <img
-      className='rounded-circle'
-      style={{ width: size, height: size }}
+      className={`rounded-circle ${className}`}
+      style={{ width: size, height: size, ...style }}
       src={src ?? config.DEFAULT_AVATAR_URL}
-      alt={alt}
+      {...props}
     />
   )
 }
