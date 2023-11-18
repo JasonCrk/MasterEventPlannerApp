@@ -20,3 +20,8 @@ export interface SimpleUser {
     picture: AccountPicture
   }
 }
+
+export interface UserWithUsername {
+  id: UserId
+  username: UserUsername
+}

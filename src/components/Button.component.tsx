@@ -11,11 +11,17 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string
 }
 
-const Button: FC<Props> = ({ isLoading, children, btnColor, ...props }) => {
+const Button: FC<Props> = ({
+  isLoading,
+  children,
+  btnColor,
+  disabled,
+  ...props
+}) => {
   return (
     <button
       className={`btn btn-${btnColor || BootstrapColor.primary}`}
-      disabled={isLoading || props.disabled}
+      disabled={isLoading || disabled}
       {...props}
     >
       {children} {isLoading && <span>...</span>}

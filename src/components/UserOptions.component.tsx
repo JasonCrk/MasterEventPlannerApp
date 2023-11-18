@@ -35,7 +35,7 @@ const UserOptions: FC = () => {
       </div>
       <ul className='dropdown-menu' style={{ marginRight: 6 }}>
         <li>
-          <Link className='dropdown-item' to={'/'}>
+          <Link className='dropdown-item' to={`/${user?.account.id}/profile`}>
             Profile
           </Link>
         </li>
