@@ -16,11 +16,12 @@ const Button: FC<Props> = ({
   children,
   btnColor,
   disabled,
+  className,
   ...props
 }) => {
   return (
     <button
-      className={`btn btn-${btnColor || BootstrapColor.primary}`}
+      className={`btn btn-${btnColor || BootstrapColor.primary} ${className}`}
       disabled={isLoading || disabled}
       {...props}
     >
