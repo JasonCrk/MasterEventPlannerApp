@@ -1,33 +1,62 @@
 import { FC } from 'react'
-import { UserId } from '../models/user.model'
 
-interface Props {
-  username: string
-  userId: UserId
-  avatar: string
-}
+import { Link } from 'react-router-dom'
 
-const ConnectionItem: FC<Props> = props => {
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+
+import { Connection } from '../models/connection.model'
+
+import { useAlerts } from '../hooks/useAlerts.hook'
+
+import { removeConnection } from '../services/connections.service'
+
+import Avatar from './Avatar.component'
+import Button from './Button.component'
+
+const ConnectionItem: FC<Connection> = ({ id, user }) => {
+  const queryClient = useQueryClient()
+  const { showAlert } = useAlerts()
+
+  const {
+    isPending: isPendingRemoveConnection,
+    mutate: mutateRemoveConnection,
+  } = useMutation({
+    mutationFn: removeConnection,
+    onSuccess: ({ message }) => {
+      queryClient.invalidateQueries({ queryKey: ['network'] })
+      showAlert({
+        message,
+        type: 'success',
+        timestamp: 3000,
+      })
+    },
+  })
+
+  const handleRemoveConnection = () => {
+    mutateRemoveConnection(id)
+  }
+
   return (
     <div
       className={'text-center border rounded p-3 bg-white text-dark '}
       style={{
         maxHeight: '300px',
-        maxWidth: '220px',
       }}
     >
-      <img
-        alt={props.username}
-        src={props.avatar}
-        className={'img-thumbnail rounded-circle'}
-        style={{ maxWidth: '150px', maxHeight: '150px' }}
-      ></img>
-      <div className={'mt-1'}>
-        <span>{props.username}</span>
-      </div>
-      <button className={'btn btn-danger mt-2 btn-sm rounded-pill'}>
-        Remove Conection
-      </button>
+      <Link to={`/${user.account.id}/profile`}>
+        <Avatar alt={user.username} src={user.account.picture} size='100%' />
+      </Link>
+
+      <p className='fs-5 my-1 fw-semibold'>{user.username}</p>
+
+      <Button
+        isLoading={isPendingRemoveConnection}
+        btnColor='danger'
+        className='rounded-pill'
+        onClick={handleRemoveConnection}
+      >
+        Remove Connection
+      </Button>
     </div>
   )
 }

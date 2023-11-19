@@ -10,6 +10,7 @@ import Home from './pages/Home.page'
 import CreateEvent from './pages/CreateEvent.page'
 import EventDetails from './pages/EventDetails.page'
 import UserProfile from './pages/UserProfile.page'
+import Network from './pages/Network.page'
 
 import { isAuthenticatedLoader, isNotAuthenticatedLoader } from './loaders'
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/create',
         element: <CreateEvent />,
+      },
+      {
+        path: '/networks',
+        element: <Network />,
       },
       {
         path: '/events/:eventId',
