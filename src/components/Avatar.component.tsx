@@ -2,8 +2,9 @@ import { FC, ImgHTMLAttributes } from 'react'
 
 import config from '../config'
 
-interface Props extends ImgHTMLAttributes<HTMLImageElement> {
+interface Props extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   size: string
+  src: string | null | undefined
 }
 
 const Avatar: FC<Props> = ({ size, src, style, className, ...props }) => {
