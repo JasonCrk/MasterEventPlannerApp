@@ -19,6 +19,7 @@ const IconButton: FC<Props> = ({
         padding: '5px 10px 8px 10px',
         textAlign: 'center',
         fontSize: style?.fontSize ? style.fontSize : '1.1rem',
+        ...style,
       }}
       {...props}
     >
