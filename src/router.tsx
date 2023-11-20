@@ -11,6 +11,7 @@ import CreateEvent from './pages/CreateEvent.page'
 import EventDetails from './pages/EventDetails.page'
 import UserProfile from './pages/UserProfile.page'
 import Network from './pages/Network.page'
+import Notifications from './pages/Notifications.page'
 
 import { isAuthenticatedLoader, isNotAuthenticatedLoader } from './loaders'
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: '/networks',
         element: <Network />,
+      },
+      {
+        path: '/notifications',
+        element: <Notifications />,
       },
       {
         path: '/events/:eventId',
