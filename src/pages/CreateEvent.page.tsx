@@ -110,6 +110,7 @@ function CreateEvent() {
         <div className='row g-2'>
           <div className='col-6'>
             <Select
+              id='selectCategory'
               label='Category'
               defaultOption='Select category'
               name='category'
