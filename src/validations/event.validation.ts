@@ -1,6 +1,6 @@
 import z from 'zod'
 
-import { Visibility } from '../models/event.model'
+import { SortByEvents, Visibility } from '../models/event.model'
 
 export const createEventSchemaValidation = z
   .object({
@@ -60,3 +60,14 @@ export const createEventSchemaValidation = z
       path: ['finishDate'],
     }
   )
+
+export const searchEventsParticipatingValidation = z.object({
+  category: z
+    .string()
+    .transform(value => (value === '' || value === null ? undefined : value))
+    .optional(),
+  sortBy: z
+    .enum([SortByEvents.RECENT.toString(), SortByEvents.UPCOMING.toString()])
+    .transform(value => (value === '' || value === null ? undefined : value))
+    .optional(),
+})

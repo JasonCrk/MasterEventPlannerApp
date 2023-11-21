@@ -128,14 +128,13 @@ function EventDetails() {
               </div>
             </div>
 
-            {userAuth && userAuth.id === event.coordinator.id && (
-              <EventOptions
-                eventId={event.id}
-                eventStatus={event.status}
-                onCancel={handleCancelEvent}
-                onDelete={handleDeleteEvent}
-              />
-            )}
+            <EventOptions
+              coordinatorId={event.coordinator.id}
+              eventId={event.id}
+              eventStatus={event.status}
+              onCancel={handleCancelEvent}
+              onDelete={handleDeleteEvent}
+            />
           </div>
 
           <p className='fs-3 fw-bold'>{event.name}</p>

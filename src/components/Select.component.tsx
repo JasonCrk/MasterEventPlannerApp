@@ -1,8 +1,9 @@
-import { FC, ReactNode } from 'react'
+import { ChangeEvent, FC, ReactNode } from 'react'
 
 import { UseFormRegister } from 'react-hook-form'
 
 interface Props {
+  id: string
   isLoading?: boolean
   register: UseFormRegister<any>
   name: string
@@ -11,9 +12,11 @@ interface Props {
   options: () => ReactNode
   defaultOption: string
   label?: string
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
 const Select: FC<Props> = ({
+  id,
   name,
   register,
   errorMessage,
@@ -22,20 +25,22 @@ const Select: FC<Props> = ({
   defaultOption,
   label,
   options,
+  onChange,
 }) => {
   return (
     <div>
       {label && (
-        <label className='form-label' style={{ marginBottom: 2 }}>
+        <label htmlFor={id} className='form-label' style={{ marginBottom: 2 }}>
           {label}
         </label>
       )}
       <select
+        id={id}
         className={`form-select ${isError && 'is-invalid'}`}
         disabled={isLoading}
-        {...register(name)}
+        {...register(name, onChange && { onChange })}
       >
-        <option value={undefined}>{defaultOption}</option>
+        <option value={''}>{defaultOption}</option>
         {!isLoading && options()}
       </select>
       {isError && <p className='text-danger mb-0'>{errorMessage}</p>}

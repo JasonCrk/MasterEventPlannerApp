@@ -1,16 +1,21 @@
 import { FC } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { useMutation } from '@tanstack/react-query'
 
 import { EventId, Status } from '../models/event.model'
+import { UserId } from '../models/user.model'
 import { MessageResponse } from '../models/response.model'
+
+import { useAuthStore } from '../store/useAuthStorage'
 
 import { cancelEvent, deleteEvent } from '../services/event.service'
 
 import { SlOptionsVertical } from 'react-icons/sl'
-import { Link } from 'react-router-dom'
 
 interface Props {
+  coordinatorId: UserId
   eventId: EventId
   eventStatus: Status
   onCancel: (data: MessageResponse) => void
@@ -18,11 +23,14 @@ interface Props {
 }
 
 const EventOptions: FC<Props> = ({
+  coordinatorId,
   eventId,
   eventStatus,
   onCancel,
   onDelete,
 }) => {
+  const user = useAuthStore(state => state.user)
+
   const { isPending: isPendingDeleteEvent, mutate: mutateDeleteEvent } =
     useMutation({
       mutationFn: deleteEvent,
@@ -53,6 +61,8 @@ const EventOptions: FC<Props> = ({
     mutateCancelEvent(eventId)
   }
 
+  if (user?.id !== coordinatorId) return null
+
   return (
     <div className='dropdown'>
       <button
@@ -66,7 +76,7 @@ const EventOptions: FC<Props> = ({
 
       <ul className='dropdown-menu dropdown-menu-end mt-1'>
         <li>
-          <Link className='dropdown-item' to={`/events/${eventId}`}>
+          <Link className='dropdown-item' to={`/events/${eventId}/edit`}>
             Edit
           </Link>
         </li>

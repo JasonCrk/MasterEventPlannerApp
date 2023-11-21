@@ -1,5 +1,11 @@
-import { Category } from './category.model'
+import { BootstrapColorOptions } from './bootstrap.model'
+import { Category, CategoryName } from './category.model'
 import { SimpleUser } from './user.model'
+
+export enum SortByEvents {
+  RECENT = 'RECENT',
+  UPCOMING = 'UPCOMING',
+}
 
 export enum Status {
   PENDING = 'PENDING',
@@ -8,15 +14,36 @@ export enum Status {
   CANCELLED = 'CANCELLED',
 }
 
-interface StatusValuesData {
+interface ValuesData {
   [key: string]: string
 }
 
-export const StatusValues: StatusValuesData = {
+export const StatusValues: ValuesData = {
   PENDING: 'Pending',
   IN_PROGRESS: 'In progress',
   FINALIZED: 'Finalized',
   CANCELLED: 'Cancelled',
+}
+
+export const VisibilityValues: ValuesData = {
+  ONLY_CONNECTIONS: 'Only Connections',
+  PUBLIC: 'Public',
+}
+
+interface ColorData {
+  [key: string]: BootstrapColorOptions
+}
+
+export const StatusColorValues: ColorData = {
+  PENDING: 'secondary',
+  IN_PROGRESS: 'info',
+  FINALIZED: 'success',
+  CANCELLED: 'danger',
+}
+
+export const VisibilityColorValues: ColorData = {
+  ONLY_CONNECTIONS: 'info',
+  PUBLIC: 'success',
 }
 
 export enum Visibility {
@@ -62,9 +89,22 @@ export interface CreateEventData {
 export interface EventItem {
   id: EventId
   coordinator: SimpleUser
+  name: EventName
+  description: EventDescription
+  visibility: EventVisibility
+  status: EventStatus
+  realizationDate: EventRealizationDate
+  category: EventCategory
+  numberParticipants: number
+  createdAt: EventCreatedAt
 }
 
 export interface EventDetails extends Event {
   participating: boolean
   numberParticipants: number
+}
+
+export interface SearchEventsParticipatingParams {
+  sortBy?: string
+  category?: CategoryName
 }

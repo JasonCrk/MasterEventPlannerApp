@@ -4,6 +4,6 @@ export interface Category {
   picture: string
 }
 
-export type CategoryId = Pick<Category, 'id'>
-export type CategoryName = Pick<Category, 'name'>
-export type CategoryPicture = Pick<Category, 'picture'>
+export type CategoryId = Category['id']
+export type CategoryName = Category['name']
+export type CategoryPicture = Category['picture']

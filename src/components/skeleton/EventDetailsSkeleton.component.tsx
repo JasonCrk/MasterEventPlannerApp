@@ -1,17 +1,13 @@
 import type { FC } from 'react'
 
-import Avatar from '../Avatar.component'
 import TagSkeleton from './TagSkeleton.component'
+import AvatarSkeleton from './AvatarSkeleton.component'
 
 const EventDetailsSkeleton: FC = () => {
   return (
     <div>
       <div className='d-flex gap-2 align-items-center mb-3'>
-        <Avatar
-          src={'https://plainbackground.com/plain1024/adb2b5.png'}
-          alt='loading'
-          size='60px'
-        />
+        <AvatarSkeleton size='60px' />
 
         <p className='placeholder-glow mb-0 d-flex flex-column gap-2'>
           <span
