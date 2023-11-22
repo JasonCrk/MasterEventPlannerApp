@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router-dom'
 import router from './router'
 
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { AlertContextProvider } from './context/alert/AlertContextProvider'
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <AlertContextProvider>
         <RouterProvider router={router} />
       </AlertContextProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
 )
