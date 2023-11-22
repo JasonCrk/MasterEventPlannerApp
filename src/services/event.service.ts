@@ -37,6 +37,19 @@ export const searchEventsParticipating = async (
     .then(response => response.data)
 }
 
+export const searchEvents = async (
+  params: URLSearchParams
+): Promise<ListResponse<EventItem>> => {
+  const accessToken = useAuthStore.getState().accessToken
+  return eventBaseEndpoint
+    .get<ListResponse<EventItem>>('/search?' + params.toString(), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(response => response.data)
+}
+
 export const getEventById = async (eventId: EventId): Promise<EventDetails> => {
   const accessToken = useAuthStore.getState().accessToken
   return eventBaseEndpoint

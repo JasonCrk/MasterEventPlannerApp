@@ -7,6 +7,7 @@ import Login from './pages/Login.page'
 import Register from './pages/Register.page'
 
 import Home from './pages/Home.page'
+import SearchEvents from './pages/SearchEvents.page'
 import CreateEvent from './pages/CreateEvent.page'
 import EventDetails from './pages/EventDetails.page'
 import UserProfile from './pages/UserProfile.page'
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: '/search',
+        element: <SearchEvents />,
       },
       {
         path: '/create',

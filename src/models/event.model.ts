@@ -108,3 +108,8 @@ export interface SearchEventsParticipatingParams {
   sortBy?: string
   category?: CategoryName
 }
+
+export interface SearchEventsParams {
+  searchQuery: string
+  category?: CategoryName
+}
