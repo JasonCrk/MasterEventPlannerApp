@@ -2,7 +2,13 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { EventId, Status, StatusValues } from '../models/event.model'
+import {
+  EventId,
+  Status,
+  StatusValues,
+  VisibilityColorValues,
+  VisibilityValues,
+} from '../models/event.model'
 import { MessageResponse } from '../models/response.model'
 import { BootstrapColorOptions } from '../models/bootstrap.model'
 
@@ -33,6 +39,7 @@ function EventDetails() {
   const { isLoading, data: event } = useQuery({
     queryKey: ['eventDetails', eventId],
     queryFn: () => getEventById(eventId!),
+    refetchOnWindowFocus: false,
   })
 
   const { mutate: mutateJoinEvent, isPending: isPendingJoinEvent } =
@@ -150,6 +157,12 @@ function EventDetails() {
               color='danger'
               icon='https://www.svgrepo.com/show/387968/local.svg'
               name={event.local}
+            />
+
+            <Tag
+              color={VisibilityColorValues[event.visibility]}
+              icon='https://www.svgrepo.com/show/532493/eye.svg'
+              name={VisibilityValues[event.visibility]}
             />
 
             <Tag

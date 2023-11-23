@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC, SelectHTMLAttributes } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -8,12 +8,22 @@ import { getAllCategories } from '../services/category.service'
 
 import Select from './Select.component'
 
-interface Props {
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   register: UseFormRegister<any>
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void
+  errorMessage?: string
+  isError?: boolean
+  isIdValue?: boolean
 }
 
-const SelectCategory: FC<Props> = ({ register, onChange }) => {
+const SelectCategory: FC<Props> = ({
+  register,
+  onChange,
+  isError,
+  errorMessage,
+  isIdValue,
+  ...selectProps
+}) => {
   const { isLoading, data: categories } = useQuery({
     queryKey: ['categories'],
     queryFn: () => getAllCategories(),
@@ -30,15 +40,26 @@ const SelectCategory: FC<Props> = ({ register, onChange }) => {
       isLoading={isLoading}
       label='Category'
       onChange={onChange}
+      errorMessage={errorMessage}
+      isError={isError}
       options={() => (
         <>
           {categories?.data.map(category => (
-            <option key={category.id} value={category.name}>
+            <option
+              key={category.id}
+              value={isIdValue ? category.id : category.name}
+              selected={
+                isIdValue
+                  ? selectProps.defaultValue === category.id
+                  : selectProps.defaultValue === category.name
+              }
+            >
               {category.name}
             </option>
           ))}
         </>
       )}
+      {...selectProps}
     />
   )
 }

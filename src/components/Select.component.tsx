@@ -1,9 +1,8 @@
-import { ChangeEvent, FC, ReactNode } from 'react'
+import { ChangeEvent, FC, ReactNode, SelectHTMLAttributes } from 'react'
 
 import { UseFormRegister } from 'react-hook-form'
 
-interface Props {
-  id: string
+interface Props extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'name'> {
   isLoading?: boolean
   register: UseFormRegister<any>
   name: string
@@ -26,6 +25,7 @@ const Select: FC<Props> = ({
   label,
   options,
   onChange,
+  ...selectProps
 }) => {
   return (
     <div>
@@ -39,6 +39,7 @@ const Select: FC<Props> = ({
         className={`form-select ${isError && 'is-invalid'}`}
         disabled={isLoading}
         {...register(name, onChange && { onChange })}
+        {...selectProps}
       >
         <option value={''}>{defaultOption}</option>
         {!isLoading && options()}
