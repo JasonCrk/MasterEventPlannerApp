@@ -62,37 +62,57 @@ messaging.onBackgroundMessage(payload => {
 
 ```
 
-6. __IMPORTANTE__: Necesito que ingrese a este [link](https://firebase.google.com/?hl=es) y cree un proyecto de firebase
+6. __IMPORTANTE__: Necesito que ingrese a este [link](https://firebase.google.com/?hl=es) y cree un proyecto de Firebase
 
-7. Luego de crear el proyecto de firebase necesito que ingrese a esta sección
+7. Luego de crear el proyecto ingrese a esta pestaña
+
+![Alt text](docs/firebase-cloud-storage.png)
+
+8. Al ingresar habrá una opción para iniciar o crear un bucket (Yo elegí uno de tipo producción para asegurar que funcione), cuando se haya creado el bucket le tendrá que salir esta ventana
+
+![Alt text](docs/firebase-storage-page.png)
+
+9. Ingrese a la pestaña llamada **_RULES_** y desde ahi modifique lo que tiene ahi para que sea igual a esto (OJO: No soy experto en Firebase yo solo busque una alternativa rápida para que funcione, ha decir verdad yo estoy 100% seguro que esta no es la mejor manera de configurar esto, pero como digo esto es solo para un proyecto académico y no uno real):
+
+![Alt text](docs/firebase-storage-rules-page.png)
+
+10. Luego necesito que ingrese a "Configuración del proyecto"
 
 ![Project config page](docs/firebase-project-config-page.png)
 
-8. Registra una app que sea de tipo web y cuando lo tenga listo vuelva a la pestaña que señale en el punto 7 y vaya a lo más bajo de la pagina y se encontrara con esto
+11. Registra una app que sea de tipo web y cuando lo tenga listo vuelva a la pestaña que señale en el punto 7 y vaya a lo más bajo de la pagina y se encontrara con esto
 
 ![Firebase config](docs/firebase-config.png)
 
-7. Con los datos que tiene usted ahi cópielos tanto en el `.env` como en el `firebase-messaging-sw.js`
+12. Con los datos que tiene usted ahi cópielos tanto en el `.env` como en el `firebase-messaging-sw.js`
 
-8. Aun falta un valor que se encuentra en el `.env` que es el siguiente:
+13. Aun faltan dos valores que se encuentran en el `.env` que son los siguientes:
 
+1.
+```py
+VITE_REACT_BASE_API_URL=
+```
+
+2.
 ```py
 VITE_REACT_FIREBASE_KEY_PAIR_MESSAGING=
 ```
 
-9. Para obtenerlo hay que buscar en esta pestaña del firebase:
+14. Para el primero solo ponga esto: http://localhost:8080/api
 
-![Alt text](docs\firebase-cloud-messaging-tab.png)
+14. Para el segundo es necesario obtenerlo de esta pestaña de la configuración de Firebase:
 
-10. Debe de tener esto habilitado (si no sabe como hacerlo puede buscar en youtube):
+![Alt text](docs/firebase-cloud-messaging-tab.png)
 
-![Alt text](docs\firebase-habilitado-2.png)
+15. Debe de tener esto habilitado (si no sabe como hacerlo puede buscar en youtube):
 
-11. Mas abajo debería den encontrar la clase que necesita y con eso ya estaría.
+![Alt text](docs/firebase-habilitado-2.png)
 
-![Alt text](docs\firebase-key-pair.png)
+16. Mas abajo debería den encontrar la clase que necesita y con eso ya estaría.
 
-12. Para terminar debe tener NodeJS (si es la ultima version mejor) y ejecute los siguientes comandos:
+![Alt text](docs/firebase-key-pair.png)
+
+17. Para terminar debe tener NodeJS (si es la ultima version mejor) y ejecute los siguientes comandos:
 
 ```cmd
 npm install
