@@ -1,5 +1,5 @@
 import { BootstrapColorOptions } from './bootstrap.model'
-import { Category, CategoryName } from './category.model'
+import { Category, CategoryId, CategoryName } from './category.model'
 import { SimpleUser } from './user.model'
 
 export enum SortByEvents {
@@ -55,7 +55,7 @@ export interface Event {
   id: string
   coordinator: SimpleUser
   name: string
-  description: string
+  description: string | null
   category: Category
   visibility: Visibility
   local: string
@@ -102,6 +102,16 @@ export interface EventItem {
 export interface EventDetails extends Event {
   participating: boolean
   numberParticipants: number
+}
+
+export interface UpdateEvent {
+  name?: EventName
+  description?: EventDescription
+  category?: CategoryId
+  local?: EventLocal
+  visibility?: EventVisibility
+  realizationDate?: EventRealizationDate
+  finishDate?: EventFinishDate
 }
 
 export interface SearchEventsParticipatingParams {

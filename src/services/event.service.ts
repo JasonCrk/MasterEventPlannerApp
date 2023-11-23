@@ -4,6 +4,7 @@ import {
   EventId,
   EventItem,
   SearchEventsParticipatingParams,
+  UpdateEvent,
 } from '../models/event.model'
 import {
   EntityWithMessageResponse,
@@ -101,6 +102,23 @@ export const cancelEvent = async (
   const accessToken = useAuthStore.getState().accessToken
   return eventBaseEndpoint
     .post<MessageResponse>(`/${eventId}/cancel`, null, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(response => response.data)
+}
+
+export const updateEvent = async ({
+  eventId,
+  updateEvent,
+}: {
+  eventId: EventId
+  updateEvent: UpdateEvent
+}): Promise<MessageResponse> => {
+  const accessToken = useAuthStore.getState().accessToken
+  return eventBaseEndpoint
+    .patch<MessageResponse>(`/${eventId}`, updateEvent, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
