@@ -128,6 +128,7 @@ function CreateEvent() {
             <Input
               label='Realization date'
               name='realizationDate'
+              min={new Date().toUTCString()}
               register={register}
               type='datetime-local'
               errorMessage={errors.realizationDate?.message}
@@ -138,6 +139,7 @@ function CreateEvent() {
             <Input
               label='Finish date'
               name='finishDate'
+              min={new Date().toUTCString()}
               type='datetime-local'
               register={register}
               errorMessage={errors.finishDate?.message}

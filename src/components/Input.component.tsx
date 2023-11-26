@@ -39,15 +39,16 @@ const Input: FC<Props> = ({
           className={`form-control ${fullWidth && 'w-100'} mb-1 ${
             isError && 'is-invalid'
           }`}
-          {...props}
           {...register(name, {
             setValueAs: value => {
               if (props.type === 'number') return parseInt(value)
-              if (props.type === 'datetime-local' && value)
-                return new Date(value).toISOString()
+              // if (props.type === 'datetime-local') {
+              //   return new Date(value).toISOString()
+              // }
               return value
             },
           })}
+          {...props}
         />
       </div>
       {isError && <p className='text-danger mb-0'>{errorMessage}</p>}

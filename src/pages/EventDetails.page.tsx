@@ -39,6 +39,7 @@ function EventDetails() {
   const { isLoading, data: event } = useQuery({
     queryKey: ['eventDetails', eventId],
     queryFn: () => getEventById(eventId!),
+    enabled: !!eventId && eventId != undefined,
     refetchOnWindowFocus: false,
   })
 
@@ -149,7 +150,7 @@ function EventDetails() {
           <div className='d-flex flex-wrap gap-2 mb-3'>
             <Tag
               color='primary'
-              icon={event.category.picture}
+              icon={event.category.icon}
               name={event.category.name}
             />
 

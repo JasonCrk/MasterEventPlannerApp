@@ -31,6 +31,18 @@ const SelectCategory: FC<Props> = ({
     refetchOnMount: false,
   })
 
+  if (isLoading)
+    return (
+      <>
+        <label className='form-label'>
+          Categorías
+          <select className='form-select'>
+            <option value={''}>Cargando...</option>
+          </select>
+        </label>
+      </>
+    )
+
   return (
     <Select
       id='selectCategory'
@@ -44,19 +56,16 @@ const SelectCategory: FC<Props> = ({
       isError={isError}
       options={() => (
         <>
-          {categories?.data.map(category => (
-            <option
-              key={category.id}
-              value={isIdValue ? category.id : category.name}
-              selected={
-                isIdValue
-                  ? selectProps.defaultValue === category.id
-                  : selectProps.defaultValue === category.name
-              }
-            >
-              {category.name}
-            </option>
-          ))}
+          {!isLoading &&
+            categories &&
+            categories.data.map(category => (
+              <option
+                key={category.id}
+                value={isIdValue ? category.id : category.name}
+              >
+                {category.name}
+              </option>
+            ))}
         </>
       )}
       {...selectProps}

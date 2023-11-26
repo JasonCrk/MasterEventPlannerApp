@@ -28,6 +28,13 @@ function EditEvent() {
 
   const navigate = useNavigate()
 
+  const { data: event, isLoading: isLoadingEvent } = useQuery({
+    queryKey: ['eventDetails', eventId],
+    queryFn: () => getEventById(eventId!),
+    refetchOnWindowFocus: false,
+    enabled: !!eventId && eventId !== undefined,
+  })
+
   const {
     handleSubmit,
     register,
@@ -37,14 +44,7 @@ function EditEvent() {
     resolver: zodResolver(updateEventSchemaValidation),
   })
 
-  const { data: event, isLoading: isLoadingEvent } = useQuery({
-    queryKey: ['eventDetails', eventId],
-    queryFn: () => getEventById(eventId!),
-    refetchOnWindowFocus: false,
-    enabled: eventId !== undefined,
-  })
-
-  const { mutate: mutateUpdateEvent, isPending: isPendingUpdateEvent } =
+  const { isPending: isPendingUpdateEvent, mutate: mutateUpdateEvent } =
     useMutation({
       mutationFn: updateEvent,
       onSuccess: ({ message }) => {

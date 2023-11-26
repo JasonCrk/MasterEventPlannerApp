@@ -105,13 +105,13 @@ export interface EventDetails extends Event {
 }
 
 export interface UpdateEvent {
-  name?: EventName
-  description?: EventDescription
-  category?: CategoryId
-  local?: EventLocal
-  visibility?: EventVisibility
-  realizationDate?: EventRealizationDate
-  finishDate?: EventFinishDate
+  name: EventName
+  description: EventDescription
+  category: CategoryId
+  local: EventLocal
+  visibility: EventVisibility
+  realizationDate: EventRealizationDate
+  finishDate: EventFinishDate
 }
 
 export interface SearchEventsParticipatingParams {

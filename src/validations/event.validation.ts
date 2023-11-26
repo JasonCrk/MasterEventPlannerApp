@@ -41,16 +41,13 @@ export const createEventSchemaValidation = z
         invalid_type_error: 'Must be a datetime',
         required_error: 'The realization date is required',
       })
-      .datetime({ message: 'Invalid realization date' })
       .refine(realizationDate => new Date(realizationDate) > new Date(), {
         message: 'The realization date must be a greater than the current date',
       }),
-    finishDate: z
-      .string({
-        invalid_type_error: 'Must be a datetime',
-        required_error: 'The finish date is required',
-      })
-      .datetime({ message: 'Invalid finish date' }),
+    finishDate: z.string({
+      invalid_type_error: 'Must be a datetime',
+      required_error: 'The finish date is required',
+    }),
   })
   .refine(
     ({ realizationDate, finishDate }) =>
@@ -103,16 +100,13 @@ export const updateEventSchemaValidation = z
         invalid_type_error: 'Must be a datetime',
         required_error: 'The realization date is required',
       })
-      .datetime({ message: 'Invalid realization date' })
       .refine(realizationDate => new Date(realizationDate) > new Date(), {
         message: 'The realization date must be a greater than the current date',
       }),
-    finishDate: z
-      .string({
-        invalid_type_error: 'Must be a datetime',
-        required_error: 'The finish date is required',
-      })
-      .datetime({ message: 'Invalid finish date' }),
+    finishDate: z.string({
+      invalid_type_error: 'Must be a datetime',
+      required_error: 'The finish date is required',
+    }),
   })
   .refine(
     ({ realizationDate, finishDate }) =>

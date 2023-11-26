@@ -22,8 +22,8 @@ const ConnectionItem: FC<Connection> = ({ id, user }) => {
     mutate: mutateRemoveConnection,
   } = useMutation({
     mutationFn: removeConnection,
-    onSuccess: ({ message }) => {
-      queryClient.invalidateQueries({ queryKey: ['network'] })
+    onSuccess: async ({ message }) => {
+      await queryClient.invalidateQueries({ queryKey: ['network'] })
       showAlert({
         message,
         type: 'success',

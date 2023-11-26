@@ -41,8 +41,10 @@ function UserProfile() {
   const { mutate: mutateUpdateProfile, isPending: isPendingUpdateAccount } =
     useMutation({
       mutationFn: updateProfile,
-      onSuccess: ({ message }) => {
-        queryClient.invalidateQueries({ queryKey: ['profile', accountId] })
+      onSuccess: async ({ message }) => {
+        await queryClient.invalidateQueries({
+          queryKey: ['profile', accountId],
+        })
         showAlert({
           message,
           type: 'success',
@@ -54,8 +56,10 @@ function UserProfile() {
   const { mutate: mutateSendInvitation, isPending: isPendingSendInvitation } =
     useMutation({
       mutationFn: sendInvitation,
-      onSuccess: ({ message }) => {
-        queryClient.invalidateQueries({ queryKey: ['profile', accountId] })
+      onSuccess: async ({ message }) => {
+        await queryClient.invalidateQueries({
+          queryKey: ['profile', accountId],
+        })
         showAlert({
           message,
           type: 'success',

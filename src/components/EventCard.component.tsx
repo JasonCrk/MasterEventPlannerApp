@@ -39,12 +39,12 @@ const EventCard: FC<Props> = ({
   const queryClient = useQueryClient()
   const { showAlert } = useAlerts()
 
-  const handleCancelEvent = () => {
-    queryClient.invalidateQueries({ queryKey: ['home'] })
+  const handleCancelEvent = async () => {
+    await queryClient.invalidateQueries({ queryKey: ['home'] })
   }
 
-  const handleDeleteEvent = (message: string) => {
-    queryClient.invalidateQueries({ queryKey: ['home'] })
+  const handleDeleteEvent = async (message: string) => {
+    await queryClient.invalidateQueries({ queryKey: ['home'] })
     showAlert({
       message,
       type: 'success',

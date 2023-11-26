@@ -34,6 +34,7 @@ const Select: FC<Props> = ({
           {label}
         </label>
       )}
+
       <select
         id={id}
         className={`form-select ${isError && 'is-invalid'}`}
@@ -44,6 +45,7 @@ const Select: FC<Props> = ({
         <option value={''}>{defaultOption}</option>
         {!isLoading && options()}
       </select>
+
       {isError && <p className='text-danger mb-0'>{errorMessage}</p>}
     </div>
   )
