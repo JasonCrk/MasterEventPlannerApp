@@ -11,6 +11,7 @@ import {
   ListResponse,
   MessageResponse,
 } from '../models/response.model'
+import { UserId } from '../models/user.model'
 
 import { useAuthStore } from '../store/useAuthStorage'
 
@@ -44,6 +45,19 @@ export const searchEvents = async (
   const accessToken = useAuthStore.getState().accessToken
   return eventBaseEndpoint
     .get<ListResponse<EventItem>>('/search?' + params.toString(), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(response => response.data)
+}
+
+export const retrieveUserEvents = async (
+  userId: UserId
+): Promise<ListResponse<EventItem>> => {
+  const accessToken = useAuthStore.getState().accessToken
+  return eventBaseEndpoint
+    .get<ListResponse<EventItem>>(`/public/${userId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

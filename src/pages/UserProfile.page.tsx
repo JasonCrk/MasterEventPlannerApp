@@ -13,12 +13,15 @@ import { useAuthStore } from '../store/useAuthStorage'
 
 import { updateProfile, getProfile } from '../services/account.service'
 import { sendInvitation } from '../services/invitation.service'
+import { retrieveUserEvents } from '../services/event.service'
 
 import { useAlerts } from '../hooks/useAlerts.hook'
 
 import ProfileSkeleton from '../components/skeleton/ProfileSkeleton.component'
 import EditProfileModal from '../components/EditProfileModal.component'
 import IconButton from '../components/IconButton.component'
+import EventCardSkeleton from '../components/skeleton/EventCardSkeleton.component'
+import EventCard from '../components/EventCard.component'
 import Avatar from '../components/Avatar.component'
 import Button from '../components/Button.component'
 
@@ -31,10 +34,17 @@ function UserProfile() {
   const { accountId } = useParams()
   const { showAlert } = useAlerts()
 
-  const { data: account, isLoading } = useQuery({
+  const { data: account, isLoading: isLoadingProfile } = useQuery({
     queryKey: ['profile', accountId],
     queryFn: ({ queryKey }) => getProfile(queryKey[1] as AccountId),
     enabled: Boolean(accountId),
+    refetchOnWindowFocus: false,
+  })
+
+  const { data: userEvents, isLoading: isLoadingUserEvents } = useQuery({
+    queryKey: ['userEvents', account?.user.id],
+    queryFn: ({ queryKey }) => retrieveUserEvents(queryKey[1] as UserId),
+    enabled: Boolean(account?.user.id),
     refetchOnWindowFocus: false,
   })
 
@@ -106,13 +116,13 @@ function UserProfile() {
       ? 'success'
       : 'primary'
 
-  if (isLoading || !account) return <ProfileSkeleton />
+  if (isLoadingProfile || !account) return <ProfileSkeleton />
 
   return (
     <>
       <EditProfileModal accountAbout={account.about} accountId={account.id} />
 
-      <section>
+      <section className='mb-4'>
         <div
           className='position-relative bg-dark-subtle'
           style={{ height: '200px' }}
@@ -243,6 +253,20 @@ function UserProfile() {
             </Button>
           )}
         </div>
+      </section>
+
+      <section className='d-flex flex-column gap-2'>
+        {isLoadingUserEvents || !userEvents ? (
+          [...Array(3)].map(() => (
+            <EventCardSkeleton key={crypto.randomUUID()} width='100%' />
+          ))
+        ) : userEvents?.data.length > 0 ? (
+          userEvents.data.map(event => (
+            <EventCard key={event.id} width='100%' {...event} />
+          ))
+        ) : (
+          <h5 className='text-center text-secondary'>No public events</h5>
+        )}
       </section>
     </>
   )
