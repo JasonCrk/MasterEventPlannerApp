@@ -70,7 +70,7 @@ const InvitationItem: FC<InvitationResponse> = ({
           <div>
             <p className='mb-0' style={{ fontSize: '1.05rem' }}>
               <Link
-                to={`/${user.id}/profile`}
+                to={`/${user.account.id}/profile`}
                 className='fw-bold link-offset-1 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-dark link-secondary'
               >
                 {user.username}
