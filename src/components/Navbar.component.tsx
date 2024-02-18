@@ -29,7 +29,7 @@ const Navbar: FC = () => {
     <nav className='navbar navbar-expand-lg navbar-dark bg-black'>
       <div className='container-md'>
         <Link className='navbar-brand fw-bold' to='/'>
-          Master Planner Event
+          Master Event Planner
         </Link>
 
         <div className='collapse navbar-collapse'>
