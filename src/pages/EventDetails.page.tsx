@@ -39,7 +39,7 @@ function EventDetails() {
   const { isLoading, data: event } = useQuery({
     queryKey: ['eventDetails', eventId],
     queryFn: () => getEventById(eventId!),
-    enabled: !!eventId && eventId != undefined,
+    enabled: !!eventId,
     refetchOnWindowFocus: false,
   })
 
