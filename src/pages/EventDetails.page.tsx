@@ -195,11 +195,14 @@ function EventDetails() {
 
           {userAuth?.id !== event.coordinator.id ? (
             <button
+              disabled={isPendingJoinEvent}
+              onClick={() => handleParticipateEvent(event.id)}
               className={`btn ${
                 event.participating ? 'btn-secondary' : 'btn-primary'
               }`}
-              disabled={isPendingJoinEvent}
-              onClick={() => handleParticipateEvent(event.id)}
+              style={{
+                cursor: isPendingJoinEvent ? 'not-allowed' : 'auto',
+              }}
             >
               {event.participating ? 'Participating' : 'Participate'}
             </button>
