@@ -9,6 +9,7 @@ function Notifications() {
   const { isLoading, data: invitations } = useQuery({
     queryKey: ['notifications'],
     queryFn: () => getAllInvitations(),
+    refetchOnWindowFocus: false,
   })
 
   return (
