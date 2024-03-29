@@ -32,6 +32,7 @@ function EditEvent() {
     queryKey: ['eventDetails', eventId],
     queryFn: () => getEventById(eventId!),
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
     enabled: !!eventId && eventId !== undefined,
   })
 

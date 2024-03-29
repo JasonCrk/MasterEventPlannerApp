@@ -39,6 +39,7 @@ function UserProfile() {
     queryFn: ({ queryKey }) => getProfile(queryKey[1] as AccountId),
     enabled: Boolean(accountId),
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   })
 
   const { data: userEvents, isLoading: isLoadingUserEvents } = useQuery({
@@ -46,6 +47,7 @@ function UserProfile() {
     queryFn: ({ queryKey }) => retrieveUserEvents(queryKey[1] as UserId),
     enabled: Boolean(account?.user.id),
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   })
 
   const { mutate: mutateUpdateProfile, isPending: isPendingUpdateAccount } =

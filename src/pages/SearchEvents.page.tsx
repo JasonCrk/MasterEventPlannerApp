@@ -33,6 +33,7 @@ function SearchEvents() {
     queryFn: () => searchEvents(searchParams),
     enabled: searchParams.get('q') !== null || searchParams.get('q') !== '',
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   })
 
   const handleSearchEvents = handleSubmit(data => {
